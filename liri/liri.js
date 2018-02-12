@@ -15,7 +15,7 @@ let subCommand = ""
 
 switch (liriCommand) {
   case 'my-tweets':
-    console.log('Here are your 20 latest tweets.\n');
+    console.log('\nHere are your 20 latest tweets.\n');
     var params = {
       name: 'phatawkwardlife'
     };
@@ -37,7 +37,7 @@ switch (liriCommand) {
     if (subCommand == '') {
       subCommand = "Ace of Base"
     }
-    console.log("Okay, here is your song: " + subCommand + "\n");
+    console.log("\nOkay, here is your song: " + subCommand + "\n");
     spotify.search({
       type: 'track',
       query: subCommand
@@ -67,7 +67,7 @@ switch (liriCommand) {
       subCommand = subCommandArray.join('+');
     }
     if (subCommand !=="") {
-      console.log("Okay, here is your movie: \n");
+      console.log("\nOkay, here is your movie: \n");
       var queryUrl = "http://www.omdbapi.com/?t=" + subCommand + "&y=&plot=short&apikey=221f1146";
       request(queryUrl, function(error, response, body) {
         if (!error && response.statusCode === 200) {
@@ -84,7 +84,7 @@ switch (liriCommand) {
         }
       });
     } else {
-      console.log("Looks like you didn't choose a movie, here is a recommendation!\n");
+      console.log("\nLooks like you didn't choose a movie, here is a recommendation!\n");
       var queryUrl = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=221f1146";
       request(queryUrl, function(error, response, body) {
         if (!error && response.statusCode === 200) {
@@ -103,8 +103,17 @@ switch (liriCommand) {
     }
     break;
   case 'do-what-it-says':
-    console.log("Imma play some dumb song now");
+    console.log("\nI have yet to finish this part, a bit overwhelmed this weekend\n");
+    fs.readFile("random.txt", "utf8", function(error, data) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(data);
+      var dataArr = data.split(",");
+      console.log(dataArr);
+    });
     break;
   default:
     console.log("I don't quite understand, I'm not as smart as SIRI :(");
+    console.log("Your Choices are...\nmy-tweets\nspotify-this-song <song name here>\nmovie-this <movie name here>\ndo-what-it-says");
 }
